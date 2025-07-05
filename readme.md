@@ -67,13 +67,32 @@ Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e
    Aqui você pode testar todos os endpoints da API de forma interativa.
 ---
 
-## Autenticando no Google Cloud
 
-```sh
-gcloud auth login
-gcloud config set project PROJECT_ID
-gcloud run deploy --port=8000
-```
+---
+
+## Fazendo Deploy ou Atualizando no Google Cloud
+
+1.  **Autentique-se e configure o projeto (se for a primeira vez):**
+    ```sh
+    gcloud auth login
+    gcloud config set project SEU_PROJECT_ID
+    ```
+
+2.  **Execute o comando de deploy para criar ou atualizar o serviço:**
+    Este comando irá construir a imagem do seu container a partir do código-fonte local, enviá-la para o Artifact Registry e fazer o deploy de uma nova revisão do seu serviço no Cloud Run.
+
+    ```sh
+    gcloud run deploy api-escola --source . --port 8000 --region southamerica-east1 --allow-unauthenticated
+    ```
+    - **`api-gestao-escolar`**: Substitua pelo nome do seu serviço. Use o mesmo nome para atualizar.
+    - **`--source .`**: Indica que o código-fonte para o build está no diretório atual.
+    - **`--port 8000`**: Expõe a porta 8000 do container, que é a porta que o Uvicorn usa.
+    - **`--region sua-regiao`**: Especifique a região do deploy (ex: `us-central1`).
+    - **`--allow-unauthenticated`**: Permite que a API seja acessada publicamente. Remova se a sua API precisar de autenticação.
+
+
+## Estrutura do Projeto
+
 
 
 ## Estrutura do Projeto
